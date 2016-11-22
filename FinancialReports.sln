@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BCAFE099-601A-4836-AAF3-317510C52509}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{893F77A7-6430-4E47-98EA-4E62E304D356}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FinancialReports", "src\FinancialReports\FinancialReports.xproj", "{A601197A-552D-4B07-ABCF-037290D98B00}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FinancialReportsTests", "src\FinancialReportsTests\FinancialReportsTests.xproj", "{F95C3EB3-1924-4F95-B06F-8F994534E372}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A601197A-552D-4B07-ABCF-037290D98B00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A601197A-552D-4B07-ABCF-037290D98B00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A601197A-552D-4B07-ABCF-037290D98B00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A601197A-552D-4B07-ABCF-037290D98B00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F95C3EB3-1924-4F95-B06F-8F994534E372}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F95C3EB3-1924-4F95-B06F-8F994534E372}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F95C3EB3-1924-4F95-B06F-8F994534E372}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F95C3EB3-1924-4F95-B06F-8F994534E372}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A601197A-552D-4B07-ABCF-037290D98B00} = {BCAFE099-601A-4836-AAF3-317510C52509}
+		{F95C3EB3-1924-4F95-B06F-8F994534E372} = {BCAFE099-601A-4836-AAF3-317510C52509}
+	EndGlobalSection
+EndGlobal
