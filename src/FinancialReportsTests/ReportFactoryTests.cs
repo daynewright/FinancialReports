@@ -1,7 +1,6 @@
 ﻿using FinancialReports.Data;
 using FinancialReports.Models;
 using FinancialReports.Factories;
-using System.Collections.Generic;
 using Xunit;
 
 namespace FinancialReportsTests
