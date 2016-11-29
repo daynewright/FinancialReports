@@ -2,6 +2,9 @@
 using Microsoft.Data.Sqlite;
 using FinancialReports.Models;
 using System;
+using FinancialReports.Factories;
+using System.Collections.Generic;
+using FinancialReports.Actions;
 
 namespace BangazonProductRevenueReports
 {
@@ -11,7 +14,9 @@ namespace BangazonProductRevenueReports
         {
             BangazonConnection db = new BangazonConnection();
             Revenue data = null;
-
+            bool isActive = true;
+            string userInput = "";
+            
             try
             {
                 db.execute("SELECT Id FROM Revenue WHERE Id = 1000", (SqliteDataReader reader) =>
@@ -31,6 +36,61 @@ namespace BangazonProductRevenueReports
                 gen.CreateDatabase();
             }
 
+            while(isActive)
+            {
+                if(userInput == "")
+                {
+                    Console.WriteLine(@"
+==========================
+BANGAZON FINANCIAL REPORTS
+==========================
+1. Weekly Report
+2. Monthly Report
+3. Quarterly Report
+4. Customer Revenue Report
+5. Product Revenue Report
+x. Exit Program");
+
+                    Console.Write("> ");
+                }
+
+                userInput = Console.ReadLine();
+
+                if(userInput.ToUpper() == "X")
+                {
+                    break;
+                }
+
+                switch(userInput)
+                {
+                    case "1":
+                        ReportAction.printWeeklyReport();
+                        break;
+
+                    case "2":
+                        ReportAction.printMonthlyReport();
+                        break;
+
+                    case "3":
+                        //dReportFactory.getQuartlyReport();
+                        break;
+
+                    case "4":
+                        //ReportFactory.getCustomerReport();
+                        break;
+
+                    case "5":
+                        //ReportAction.getProductReport();
+                        break;
+                        
+                    default:
+                        Console.WriteLine("You did not enter a valid menu option.  Please try again.");
+                        Console.Write("> ");
+                        userInput = Console.ReadLine();
+                        break;
+                }
+                
+            }
         }
     }
 }

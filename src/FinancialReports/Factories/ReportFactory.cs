@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FinancialReports.Data;
 using FinancialReports.Models;
 using Microsoft.Data.Sqlite;
@@ -8,62 +9,53 @@ namespace FinancialReports.Factories
     public class ReportFactory
     {
         public Revenue SingleProduct { get; set; }
-        public List<Revenue> ListProducts { get; set; }
+        public static List<Revenue> ListProducts { get; set; } = new List<Revenue>();
 
-
-        public Revenue get(int id)
+        private static BangazonConnection _connection = new BangazonConnection();
+        public static List<Revenue> getWeeklyReport()
         {
-            BangazonConnection connection = new BangazonConnection();
+            BangazonConnection connection = _connection;
 
-            connection.execute(@"SELECT * FROM Revenue WHERE Id = " + id,
-            (SqliteDataReader reader) =>
-            {
+            connection.execute(@"SELECT 
+                ProductName, ProductRevenue, PurchaseDate
+                FROM Revenue WHERE PurchaseDate >= DATE('now', 'weekday 0', '-7 days')",
+            (SqliteDataReader reader) => {
                 while (reader.Read())
                 {
-                    SingleProduct = new Revenue
-                    {
-                        Id = reader.GetInt32(0),
-                        ProductName = reader[1].ToString(),
-                        ProductCost = reader.GetInt32(2),
-                        ProductRevenue = reader.GetInt32(3),
-                        ProductSupplierState = reader[4].ToString(),
-                        CustomerFirstName = reader[5].ToString(),
-                        CustomerLastName = reader[6].ToString(),
-                        CustomerAddress = reader[7].ToString(),
-                        CustomerZipCode = reader.GetInt32(8),
-                        PurchaseDate = reader.GetDateTime(9)
-                    };
+                    ListProducts.Add( new Revenue {
+                        ProductName = reader[0].ToString(),
+                        ProductRevenue = reader.GetInt32(1),
+                        PurchaseDate = Convert.ToDateTime(reader[2].ToString())
+                    });
                 }
             });
-            return SingleProduct;
+            return ListProducts;
         }
-
-        public List<Revenue> getByDates(string startDate, string endDate)
+        public static List<Revenue> getMonthlyReport()
         {
-            BangazonConnection connection = new BangazonConnection();
-            connection.execute($@"SELECT * FROM Revenue WHERE PurchaseDate < {endDate} & PurchaseDate > {startDate}",
-                (SqliteDataReader reader) =>
+            BangazonConnection connection = _connection;
+            connection.execute(@"SELECT
+                ProductName, ProductRevenue, PurchaseDate
+                FROM Revenue WHERE PurchaseDate BETWEEN DATE('now','start of month') AND DATE('now')",
+            (SqliteDataReader reader) => {
+                while (reader.Read())
                 {
-                    while (reader.Read())
-                    {
-                        SingleProduct = new Revenue
-                        {
-                            Id = reader.GetInt32(0),
-                            ProductName = reader[1].ToString(),
-                            ProductCost = reader.GetInt32(2),
-                            ProductRevenue = reader.GetInt32(3),
-                            ProductSupplierState = reader[4].ToString(),
-                            CustomerFirstName = reader[5].ToString(),
-                            CustomerLastName = reader[6].ToString(),
-                            CustomerAddress = reader[7].ToString(),
-                            CustomerZipCode = reader.GetInt32(8),
-                            PurchaseDate = reader.GetDateTime(9)
-                        };
-
-                        ListProducts.Add(SingleProduct);
-                    }
-                });
-            return ListProducts; 
+                    ListProducts.Add( new Revenue {
+                        ProductName = reader[0].ToString(),
+                        ProductRevenue = reader.GetInt32(1),
+                        PurchaseDate = Convert.ToDateTime(reader[2].ToString())
+                    });
+                }
+            });
+            return ListProducts;
+        }
+        public static List<Revenue> getCustomerReport()
+        {
+            throw new NotImplementedException();
+        }
+        public static List<Revenue> getQuartlyReport()
+        {
+            throw new NotImplementedException();
         }
     }
 }
