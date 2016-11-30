@@ -64,5 +64,19 @@ namespace FinancialReportsTests
                 Assert.True(product.Quarter == currentQuarter);
             }
         }
+        [Fact]
+        public void CanGetRevenuePerCustomer()
+        {
+            BangazonConnection connection = new BangazonConnection();
+            List<Revenue> customers = new List<Revenue>();
+
+            customers = ReportFactory.getCustomerReport();
+ 
+            foreach(Revenue customer in customers)
+            {
+                Assert.True(customer.CustomerFirstName != null);
+                Assert.True(customer.ProductRevenue > 0);
+            }
+        }
     }
 }
