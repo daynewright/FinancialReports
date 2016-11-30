@@ -38,9 +38,7 @@ namespace BangazonProductRevenueReports
 
             while(isActive)
             {
-                if(userInput == "")
-                {
-                    Console.WriteLine(@"
+                Console.WriteLine(@"
 ==========================
 BANGAZON FINANCIAL REPORTS
 ==========================
@@ -51,13 +49,13 @@ BANGAZON FINANCIAL REPORTS
 5. Product Revenue Report
 x. Exit Program");
 
-                    Console.Write("> ");
-                }
+                Console.Write("> ");
 
                 userInput = Console.ReadLine();
 
                 if(userInput.ToUpper() == "X")
                 {
+                    isActive = false;
                     break;
                 }
 
@@ -85,8 +83,7 @@ x. Exit Program");
                         
                     default:
                         Console.WriteLine("You did not enter a valid menu option.  Please try again.");
-                        Console.Write("> ");
-                        userInput = Console.ReadLine();
+                        Console.WriteLine("");
                         break;
                 }
                 
