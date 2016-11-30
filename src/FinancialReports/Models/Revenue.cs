@@ -14,6 +14,6 @@ namespace FinancialReports.Models
         public string CustomerAddress { get; set; }
         public int CustomerZipCode { get; set; }
         public DateTime PurchaseDate { get; set; }
-
+        public int? Quarter { get; set; }
     }
 }

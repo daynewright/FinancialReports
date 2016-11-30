@@ -70,11 +70,11 @@ x. Exit Program");
                         break;
 
                     case "3":
-                        //dReportFactory.getQuartlyReport();
+                        ReportAction.printQuarterlyReport();
                         break;
 
                     case "4":
-                        //ReportFactory.getCustomerReport();
+                        ReportAction.printCustomerReport();
                         break;
 
                     case "5":
